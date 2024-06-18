@@ -37,6 +37,8 @@ class Pipeline:
 
         print("Training KNN")
         # TODO:  use mlflow to log this part, look at how to use autolog in mlflow documentation  
+        mlflow.autolog()
+        
         knn = KNeighborsClassifier(n_neighbors=5, weights='distance', metric='cosine')
         knn.fit(X_train, y_train)
         y_pred = knn.predict(X_val)
@@ -78,7 +80,7 @@ class Pipeline:
 
     def predict_mlflow_model(self, text_input: str):
         if not self._mlflow_model:
-            model_id = """REPLACE WITH YOUR ID"""
+            model_id = """dfab5e69f4d94ba49cb37995cc6794b3"""
             self._mlflow_model = mlflow.sklearn.load_model(f"file:///workspaces/build-your-first-ml-pipeline-workshop/mlruns/0/{model_id}/artifacts/model")
 
         return self._mlflow_model.predict(self.embeddings_model.encode(text_input).reshape(1, -1))
