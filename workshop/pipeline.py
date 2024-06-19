@@ -16,7 +16,7 @@ class Pipeline:
         print("Initializing sentence transformers")
         self.embeddings_model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
         print("Setting correct mlflow tracking path")
-        mlflow.set_tracking_uri("file:///workspaces/build-your-first-ml-pipeline-workshop/mlruns")
+        mlflow.set_tracking_uri("file:///workspaces/ML-Pipeline/mlruns")
 
         self._mlflow_model = None
 
@@ -36,9 +36,8 @@ class Pipeline:
             train_embeddings, train_data['label_name'], test_size=0.2, random_state=0)
 
         print("Training KNN")
-        # TODO:  use mlflow to log this part, look at how to use autolog in mlflow documentation  
         mlflow.autolog()
-        
+
         knn = KNeighborsClassifier(n_neighbors=5, weights='distance', metric='cosine')
         knn.fit(X_train, y_train)
         y_pred = knn.predict(X_val)
@@ -80,8 +79,8 @@ class Pipeline:
 
     def predict_mlflow_model(self, text_input: str):
         if not self._mlflow_model:
-            model_id = """dfab5e69f4d94ba49cb37995cc6794b3"""
-            self._mlflow_model = mlflow.sklearn.load_model(f"file:///workspaces/build-your-first-ml-pipeline-workshop/mlruns/0/{model_id}/artifacts/model")
+            model_id = """79c34b09555141dfa86e356df6d727f3""" # tip: model_id should look like this: a1ab9f729978489cabc903f14f70c7d3 and you can find it in the MLFlow UI (see Task 9 in test_pipeline.ipynb)
+            self._mlflow_model = mlflow.sklearn.load_model(f"file:///workspaces/ML-Pipelinemlruns/0/{model_id}/artifacts/model")
 
         return self._mlflow_model.predict(self.embeddings_model.encode(text_input).reshape(1, -1))
 
