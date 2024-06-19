@@ -18,4 +18,7 @@ content = st.text_input("Type your query", value='I lost my card')
 output = pipeline.predict_mlflow_model(content)
 if st.button("Predict"):
     st.text(output)
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

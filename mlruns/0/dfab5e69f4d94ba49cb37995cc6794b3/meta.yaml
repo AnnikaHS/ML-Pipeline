@@ -1,0 +1,15 @@
+artifact_uri: file:///workspaces/build-your-first-ml-pipeline-workshop/mlruns/0/dfab5e69f4d94ba49cb37995cc6794b3/artifacts
+end_time: 1718707034957
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: dfab5e69f4d94ba49cb37995cc6794b3
+run_name: delightful-mule-0
+run_uuid: dfab5e69f4d94ba49cb37995cc6794b3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718707033384
+status: 3
+tags: []
+user_id: codespace
